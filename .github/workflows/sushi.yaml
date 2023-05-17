@@ -1,0 +1,21 @@
+---
+- name: RCMS Website Testing
+  hosts: rcms_servers
+  gather_facts: false
+
+  tasks:
+    - name: Install dependencies
+      yum:
+        name:
+          - python3
+          - selenium
+          - geckodriver
+        state: present
+
+    - name: Run RCMS website tests
+      command: python3 /path/to/test_script.py
+      environment:
+        DISPLAY: ":0"
+
+    - name: Capture test results
+      command: cp /path/to/test_results.xml /path/to/test_reports/
